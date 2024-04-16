@@ -39,11 +39,16 @@ TEST_CASE("Prim's Algorithm: Sparse Graph", "[prim_mst]")
         Graph::Edge(6, 7, 4),
     };
 
-    SECTION("Testing MST for Sparse Graph")
+    auto mst = prim_mst(graph, 0);
+
+    SECTION("Check Total Weight for Sparse Graph")
     {
-        auto mst = prim_mst(graph, 0);
         int totalWeight = mst.totalWeight;
         REQUIRE(totalWeight == expectedWeight);
+    }
+
+    SECTION("Check MST Edges for Sparse Graph")
+    {
         REQUIRE(is_permutation(mstEdges.begin(), mstEdges.end(), mst.edges.begin(), mst.edges.end()));
     }
 }
@@ -101,11 +106,16 @@ TEST_CASE("Prim's Algorithm: Dense Graph", "[prim_mst]")
         Graph::Edge(8, 9, 3),
     };
 
-    SECTION("Testing MST for Dense Graph")
+    auto mst = prim_mst(graph, 0);
+
+    SECTION("Check Total Weight for Sparse Graph")
     {
-        auto mst = prim_mst(graph);
         int totalWeight = mst.totalWeight;
         REQUIRE(totalWeight == expectedWeight);
+    }
+
+    SECTION("Check MST Edges for Sparse Graph")
+    {
         REQUIRE(is_permutation(mstEdges.begin(), mstEdges.end(), mst.edges.begin(), mst.edges.end()));
     }
 }
