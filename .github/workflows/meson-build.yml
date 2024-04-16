@@ -36,9 +36,6 @@ jobs:
       run: meson test -C build/
       continue-on-error: true  # Optional: continue CI pipeline even if tests fail
 
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v2
-      if: always()  # Ensure this step runs even if the test step fails
-      with:
-        name: Test Results
-        path: build/meson-logs/testlog.junit.xml  # Adjust the path according to your project structure
+    - name: Set job outcome
+      if: failure()
+      run: echo "Tests failed; setting job status to failed." && exit 1
