@@ -1,4 +1,4 @@
-name: Meson Build and Test
+name: Check
 
 on:
   push:
