@@ -1,5 +1,7 @@
 # CS3364-GroupProject
 
+[![Check](https://github.com/jaxcksn/CS3364-GroupProject/actions/workflows/meson-build.yml/badge.svg)](https://github.com/jaxcksn/CS3364-GroupProject/actions/workflows/meson-build.yml)
+
 ## Getting Started
 
 The first thing you need to do is install meson and ninja, which will handle all of the building for you. The easiest way to do this is to just run:
@@ -31,3 +33,5 @@ When you are ready to test the algorithms, run the following, you should see wha
 ```bash
 python test.py
 ```
+
+When you submit a commit, it will also run the tests.
