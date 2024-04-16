@@ -34,8 +34,6 @@ jobs:
 
     - name: Test
       run: meson test -C build/
-      continue-on-error: true  # Optional: continue CI pipeline even if tests fail
+     
 
-    - name: Set job outcome
-      if: failure()
-      run: echo "Tests failed; setting job status to failed." && exit 1
+
