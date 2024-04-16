@@ -41,4 +41,4 @@ jobs:
       if: always()  # Ensure this step runs even if the test step fails
       with:
         name: Test Results
-        path: builddir/meson-logs/testlog.junit.xml  # Adjust the path according to your project structure
+        path: build/meson-logs/testlog.junit.xml  # Adjust the path according to your project structure
