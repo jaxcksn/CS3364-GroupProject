@@ -4,6 +4,7 @@
 #include <vector>
 #include <utility>
 #include <iostream>
+#include <expected>
 
 /**
  * Representation of a graph as an adjacency list. Might prove useful to convert this to
@@ -52,6 +53,16 @@ public:
     {
         return adjList.size();
     }
+
+    int edgeCount() const
+    {
+        int count = 0;
+        for (const auto &neighbors : adjList)
+        {
+            count += neighbors.size();
+        }
+        return count / 2;
+    }
 };
 
 /**
@@ -72,5 +83,8 @@ struct MST
         }
     }
 };
+
+Graph loadGraphFromFile(const std::string &file);
+bool serializeGraphToFile(Graph &graph, const std::string &file);
 
 #endif
