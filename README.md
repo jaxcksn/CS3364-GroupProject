@@ -18,6 +18,41 @@ python build.py
 
 If everything builds correctly, you should be set to run the program, which can be found in the build directory.
 
+## Using the CLI
+
+### Command Syntax
+
+```bash
+./Task2 [GRAPHFILE] [ALGO]
+```
+
+### Arguments
+
+There are two command line arguments the program requires
+
+1. **GRAPHFILE**: The path to the graph to use for the program.
+2. **ALGO**: Can be "kruskal" or "prim" for Kruskal's and Prim's algorithms respectively.
+
+### Graph File Format
+
+The graph file should be formatted as follows:
+
+- The first line is the number of nodes.
+- Each subsequent line represents an edge with three integers: src, dest, and weight, where src and dest are the vertices connected by the edge, and weight is the weight of the edge.
+
+Example of a graph file content:
+
+```
+3
+0 1 10
+2 1 2
+1 2 3
+```
+
+There are some sample graph files in the [examples folder](/examples/)
+
+**NOTE**: Graphs are undirected in this program, so you only should specify an edge once, for example if you have the edge `0 1 2` you shouldn't add `1 0 2` since they are the same.
+
 ## Editing the Source Code
 
 The main files you should be editing are the implementations of [Prim's Algorithm](src/prim.cpp) and [Kruskal's Algorithm](src/kruskal.cpp)
