@@ -1,7 +1,7 @@
 #ifndef KRUSKAL_HPP
 #define KRUSKAL_HPP
 
-#include "Graph.hpp"
+#include "graph.hpp"
 #include "algorithm"
 #include "unordered_map"
 #include <numeric>

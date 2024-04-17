@@ -1,7 +1,7 @@
 #ifndef PRIM_HPP
 #define PRIM_HPP
 
-#include "Graph.hpp"
+#include "graph.hpp"
 
 MST prim_mst(Graph &graph, int start = 0);
 

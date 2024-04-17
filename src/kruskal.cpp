@@ -1,4 +1,4 @@
-#include "Graph.hpp"
+#include "graph.hpp"
 #include "kruskal.hpp"
 #include <vector>
 #include <algorithm>

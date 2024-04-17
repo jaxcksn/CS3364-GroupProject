@@ -3,7 +3,7 @@
 #include "../src/kruskal.hpp"
 #include <algorithm>
 #include <set>
-#include "../src/Graph.hpp"
+#include "../src/graph.hpp"
 
 using namespace std;
 

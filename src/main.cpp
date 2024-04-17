@@ -1,6 +1,6 @@
 // This is the main C++ file, do not delete me or else the build system breaks.
 #include <iostream>
-#include "Graph.hpp"
+#include "graph.hpp"
 #include "kruskal.hpp"
 #include "prim.hpp"
 #include <chrono>

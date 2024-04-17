@@ -2,7 +2,7 @@
 #include "Catch2.hpp"
 #include "../src/kruskal.hpp"
 #include "algorithm"
-#include "../src/Graph.hpp"
+#include "../src/graph.hpp"
 
 using namespace std;
 
