@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <utility>
+#include <iostream>
 
 /**
  * Representation of a graph as an adjacency list. Might prove useful to convert this to
@@ -16,10 +17,24 @@ public:
         int src, dest, weight;
         Edge(int s, int d, int w) : src(s), dest(d), weight(w) {}
 
+        // This is what it means for two edges to be equal
         bool operator==(const Edge &other) const
         {
-            return (src == other.src && dest == other.dest && weight == other.weight);
+            return (src == other.src && dest == other.dest && weight == other.weight) || (src == other.dest && dest == other.src && weight == other.weight);
         };
+
+        bool operator<(const Edge &other) const
+        {
+            if (weight != other.weight)
+            {
+                return weight < other.weight;
+            }
+            if (src != other.src)
+            {
+                return src < other.src;
+            }
+            return dest < other.dest;
+        }
     };
 
     // Create an adjacency list.
@@ -46,6 +61,16 @@ struct MST
 {
     std::vector<Graph::Edge> edges;
     int totalWeight = 0;
+
+    void print() const
+    {
+        std::cout << "Minimum Spanning Tree (MST) - Total Weight: " << totalWeight << "\n";
+        std::cout << "Edges:\n";
+        for (const auto &edge : edges)
+        {
+            std::cout << "Edge from " << edge.src << " to " << edge.dest << " with weight " << edge.weight << "\n";
+        }
+    }
 };
 
 #endif
