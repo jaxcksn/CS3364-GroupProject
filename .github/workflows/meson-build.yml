@@ -1,9 +1,6 @@
 name: Check
 
 on:
-  push:
-    branches:
-      - main  # Set this to the branches where you want to run CI
   pull_request:
     branches:
       - main
