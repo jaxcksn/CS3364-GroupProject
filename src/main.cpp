@@ -4,63 +4,73 @@
 #include "kruskal.hpp"
 #include "prim.hpp"
 #include <chrono>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <iomanip>
+
 using namespace std;
 
 /**
- * Main function for the program, which takes several arguments:
- * PROGRAM_NAME graphFile algo
- *
- * Where:
- * file is the path to the graph to load
- * algo is either "prim" or "kruskal"
+ * Tests the algorithm against multiple graphs, outputing the average runtime.
  */
-int main(int argc, char *argv[])
+void testAlgorithm(Graph &graph, ofstream &outputFile, int times = 10)
 {
-    if (argc != 3)
-    {
-        cerr << "ERROR: Invalid number of arguments, must pass file and algo arguments." << endl;
-        return 1;
-    }
-
-    // Load the graph from a file
-    Graph graph = loadGraphFromFile(argv[1]);
-
-    // These are error conditions
-    if (graph.vertNumber() == 0 || graph.edgeCount() == 0)
-    {
-        cerr << "ERROR: Could not load graph from file" << endl;
-        return 1;
-    }
-
-    // Some information for us
-    cout << "\nGraph Size: " << graph.vertNumber() << " nodes | " << graph.edgeCount() << " edges" << endl;
-
     chrono::steady_clock::time_point start;
     chrono::steady_clock::time_point end;
+    chrono::nanoseconds kruskalTotal(0);
+    chrono::nanoseconds primTotal(0);
+    MST mst;
 
-    if (strcmp(argv[2], "kruskal") == 0)
+    outputFile << "Testing Graph: " << graph.name << endl;
+    outputFile << "\nGraph Size: " << graph.vertNumber() << " nodes | " << graph.edgeCount() << " edges" << endl;
+    outputFile << "Running " << times << " runs per algorithm.\n"
+               << endl;
+
+    for (int i = 0; i < times; i++)
     {
-        cout << "Running Kruskal's Algorithm on Graph" << endl;
-        // Start the clock
         start = chrono::high_resolution_clock::now();
-        MST output = kruskal_mst(graph);
-        // End the clock
+        mst = kruskal_mst(graph);
         end = chrono::high_resolution_clock::now();
-    }
-    else
-    {
-        cout << "Running Prim's Algorithm on Graph" << endl;
-        // Start the clock
-        start = chrono::high_resolution_clock::now();
-        MST output = prim_mst(graph);
-        // End the clock
-        end = chrono::high_resolution_clock::now();
+        kruskalTotal += chrono::duration_cast<chrono::nanoseconds>(end - start);
     }
 
-    // We'll change the duration to nanoseconds
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start);
-    // Output the results
-    cout << "Execution Time: " << duration.count() << " ns" << endl;
+    for (int i = 0; i < times; i++)
+    {
+        start = chrono::high_resolution_clock::now();
+        mst = prim_mst(graph);
+        end = chrono::high_resolution_clock::now();
+        primTotal += chrono::duration_cast<chrono::nanoseconds>(end - start);
+    }
 
-    return 0;
+    chrono::nanoseconds avgKruskalTime = kruskalTotal / times;
+    chrono::nanoseconds avgPrimTime = primTotal / times;
+
+    outputFile << "Average Kruskal's Algorithm Runtime: " << avgKruskalTime.count() << " ns" << endl;
+    outputFile << "Average Prim's Algorithm Runtime: " << avgPrimTime.count() << " ns" << endl
+               << endl;
+}
+
+int main(int argc, char *argv[])
+{
+    if (argc >= 2)
+    {
+        ofstream outputFile("out.txt");
+        // We want more than one argument
+        for (size_t i = 1; i < argc; i++)
+        {
+            cout << "Testing: " << argc << " " << argv[i];
+            Graph testGraph = loadGraphFromFile(argv[i]);
+
+            // We couldn't load this one
+            if (testGraph.vertNumber() == 0)
+            {
+                continue;
+            }
+
+            // Run the algorithm text
+            testAlgorithm(testGraph, outputFile, 10);
+        }
+    }
+    cout << "Results have been saved to out.txt";
 }

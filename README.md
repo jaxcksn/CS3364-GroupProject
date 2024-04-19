@@ -23,15 +23,18 @@ If everything builds correctly, you should be set to run the program, which can 
 ### Command Syntax
 
 ```bash
-./Task2 [GRAPHFILE] [ALGO]
+./Task2 [GRAPHFILES]
 ```
 
 ### Arguments
 
-There are two command line arguments the program requires
+There is a single command line arguments the program requires
 
-1. **GRAPHFILE**: The path to the graph to use for the program.
-2. **ALGO**: Can be "kruskal" or "prim" for Kruskal's and Prim's algorithms respectively.
+1. **GRAPHFILE**: This should be a space seperated lists of graph files to run.
+
+### Output
+
+The program will output a file called "out.txt" that has all the run time information for the program.
 
 ### Graph File Format
 
@@ -59,7 +62,7 @@ The main files you should be editing are the implementations of [Prim's Algorith
 
 You can also edit the header files for each one too!
 
-There is also a shared header file called Graph that has been created, and creates Graph class that should be shared by both algorithms for testing purposes.
+There is also a shared header file called Graph that has been created, and contains the Graph class that should be shared by both algorithms for testing purposes.
 
 ## Testing
 
