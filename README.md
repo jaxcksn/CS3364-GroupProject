@@ -40,12 +40,14 @@ The program will output a file called "out.txt" that has all the run time inform
 
 The graph file should be formatted as follows:
 
-- The first line is the number of nodes.
+- The first line is the name of the graph (No spaces are allowed)
+- The second line is the number of verticies in the graph
 - Each subsequent line represents an edge with three integers: src, dest, and weight, where src and dest are the vertices connected by the edge, and weight is the weight of the edge.
 
 Example of a graph file content:
 
 ```
+example_graph
 3
 0 1 10
 2 1 2
