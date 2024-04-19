@@ -1,5 +1,7 @@
 project('CS3364-GroupProject','cpp',default_options: ['cpp_std=c++17'])
-executable('Task2',sources: ['src/main.cpp', 'src/kruskal.cpp', 'src/prim.cpp','src/graph.cpp'],install: false, build_by_default: true)
+incdir = include_directories('includes')
+
+executable('Task2',sources: ['src/main.cpp', 'src/kruskal.cpp', 'src/prim.cpp','src/graph.cpp'],install: false, build_by_default: true, include_directories: incdir)
 
 prim_test_d = executable('prim_tests_d', sources: ['tests/test_prim_dense.cpp','src/prim.cpp','tests/Catch2.cpp','src/graph.cpp'], dependencies: [])
 kruskal_test_d = executable('kruskal_tests_d', sources: ['tests/test_kruskal_dense.cpp','src/kruskal.cpp','tests/Catch2.cpp','src/graph.cpp'], dependencies: [])

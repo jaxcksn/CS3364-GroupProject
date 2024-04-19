@@ -1,0 +1,8 @@
+Testing Graph: Small_Graph
+
+Graph Size: 3 nodes | 3 edges
+Running 10 runs per algorithm.
+
+Average Kruskal's Algorithm Runtime: 6100 ns
+Average Prim's Algorithm Runtime: 124 ns
+

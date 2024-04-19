@@ -38,10 +38,12 @@ public:
         }
     };
 
+    // An optional name for the graph
+    std::string name;
     // Create an adjacency list.
     std::vector<std::vector<std::pair<int, int>>> adjList;
 
-    explicit Graph(int verts) : adjList(verts) {}
+    explicit Graph(int verts, const std::string& graphName = "") : adjList(verts), name(graphName) {}
 
     void addEdge(int src, int dest, int weight)
     {
@@ -85,6 +87,6 @@ struct MST
 };
 
 Graph loadGraphFromFile(const std::string &file);
-bool serializeGraphToFile(Graph &graph, const std::string &file);
+bool serializeGraphToFile(Graph &graph, std::string &graphName, const std::string &file);
 
 #endif

@@ -6,8 +6,8 @@
 /**
  * Saves a graph to a serialized .graph file.
  */
-bool serializeGraphToFile(Graph &graph, const std::string &file)
-{
+bool serializeGraphToFile(Graph &graph, const std::string &graphName, const std::string &file)
+{   
     // Create an output file stream
     std::ofstream outputFile(file);
     // Check to make sure the point is valid
@@ -18,7 +18,9 @@ bool serializeGraphToFile(Graph &graph, const std::string &file)
         return false;
     }
 
-    // First line will be graph size.
+    // First line is the name of the graph
+    outputFile << graph.name << std::endl;
+    // Second line will be graph size.
     outputFile << graph.adjList.size() << std::endl;
     // Now for each edge, we'll add a new line
 
@@ -52,12 +54,15 @@ Graph loadGraphFromFile(const std::string &file)
         std::cerr << "Error loading graph file.";
         return Graph(0);
     }
+    std::string graphName;
+    inputFile >> graphName;
+
 
     int verts, src, dest, weight;
     // Get number of verticies
     inputFile >> verts;
 
-    Graph graph(verts);
+    Graph graph(verts,graphName);
     while (inputFile >> src >> dest >> weight)
     {
         graph.addEdge(src, dest, weight);
