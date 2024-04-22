@@ -87,7 +87,7 @@ struct MST
     }
 };
 
-inline std::string graphToDot(const Graph &graph, const std::string &graphName = "Graph"){
+inline std::string graphToDot(const Graph &graph, const std::string &graphName = "G"){
     std::stringstream stream;
     stream << "graph "<< graphName << "{\n";
     for(size_t i=0; i < graph.adjList.size(); i++) {
