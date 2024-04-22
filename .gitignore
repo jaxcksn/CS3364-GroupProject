@@ -31,6 +31,8 @@
 *.out
 *.app
 
+*.dot
+out.txt
 # Project Specific
 build/
 .vscode
