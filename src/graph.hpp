@@ -4,7 +4,8 @@
 #include <vector>
 #include <utility>
 #include <iostream>
-#include <expected>
+#include <set>
+#include <sstream>
 
 /**
  * Representation of a graph as an adjacency list. Might prove useful to convert this to
@@ -43,7 +44,7 @@ public:
     // Create an adjacency list.
     std::vector<std::vector<std::pair<int, int>>> adjList;
 
-    explicit Graph(int verts, const std::string& graphName = "") : adjList(verts), name(graphName) {}
+    explicit Graph(int verts, const std::string &graphName = "") : adjList(verts), name(graphName) {}
 
     void addEdge(int src, int dest, int weight)
     {
@@ -85,6 +86,48 @@ struct MST
         }
     }
 };
+
+inline std::string graphToDot(const Graph &graph, const std::string &graphName = "Graph"){
+    std::stringstream stream;
+    stream << "graph "<< graphName << "{\n";
+    for(size_t i=0; i < graph.adjList.size(); i++) {
+        for (const auto& edge : graph.adjList[i]) {
+            if(i < edge.first) {
+                stream << "    " << i << " -- " << edge.first << " [label=\"" << edge.second << "\"];\n";
+            }
+        }
+    }
+    stream << "}\n";
+    return stream.str();
+}
+
+inline std::string mstToDot(const Graph& graph, const MST& mst, const std::string& mstName = "MST") {
+    std::stringstream stream;
+    stream << "graph " << mstName << " {\n";
+    stream << "    label=\"Minimum Spanning Tree (Total Weight: " << mst.totalWeight << ")\";\n";
+
+    // Create a set of MST edges for quick lookup
+    std::set<Graph::Edge> mstEdges(mst.edges.begin(), mst.edges.end());
+
+    // Iterate over all vertices and their adjacency list
+    for(size_t i = 0; i < graph.adjList.size(); i++) {
+        for (const auto& edge : graph.adjList[i]) {
+            if(i < edge.first) { // This check ensures each edge is added only once (undirected graph)
+                // Check if this edge is in the MST
+                Graph::Edge tempEdge(i, edge.first, edge.second);
+                bool isMstEdge = mstEdges.count(tempEdge) > 0;
+
+                // Output edge with color red if it's part of the MST, otherwise default (black)
+                stream << "    " << i << " -- " << edge.first;
+                stream << " [label=\"" << edge.second << "\", color=" << (isMstEdge ? "red" : "black") << "];\n";
+            }
+        }
+    }
+
+    stream << "}\n";
+    return stream.str();
+}
+
 
 Graph loadGraphFromFile(const std::string &file);
 bool serializeGraphToFile(Graph &graph, std::string &graphName, const std::string &file);

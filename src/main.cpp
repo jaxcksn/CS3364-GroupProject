@@ -53,24 +53,34 @@ void testAlgorithm(Graph &graph, ofstream &outputFile, int times = 10)
 
 int main(int argc, char *argv[])
 {
-    if (argc >= 2)
+    if (strcmp(argv[1], "test") == 0)
     {
-        ofstream outputFile("out.txt");
-        // We want more than one argument
-        for (size_t i = 1; i < argc; i++)
-        {
-            cout << "Testing: " << argc << " " << argv[i];
-            Graph testGraph = loadGraphFromFile(argv[i]);
+        Graph testGraph = loadGraphFromFile(argv[2]);
+        MST mst = kruskal_mst(testGraph);
 
-            // We couldn't load this one
-            if (testGraph.vertNumber() == 0)
-            {
-                continue;
-            }
-
-            // Run the algorithm text
-            testAlgorithm(testGraph, outputFile, 10);
-        }
+        cout << mstToDot(testGraph, mst);
     }
-    cout << "Results have been saved to out.txt";
+    else
+    {
+        if (argc >= 3)
+        {
+            ofstream outputFile("out.txt");
+            // We want more than one argument
+            for (size_t i = 1; i < argc; i++)
+            {
+                cout << "Testing: " << argc << " " << argv[i];
+                Graph testGraph = loadGraphFromFile(argv[i]);
+
+                // We couldn't load this one
+                if (testGraph.vertNumber() == 0)
+                {
+                    continue;
+                }
+
+                // Run the algorithm text
+                testAlgorithm(testGraph, outputFile, 10);
+            }
+        }
+        cout << "Results have been saved to out.txt";
+    }
 }
