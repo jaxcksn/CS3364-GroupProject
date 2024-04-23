@@ -58,7 +58,19 @@ int main(int argc, char *argv[])
         Graph testGraph = loadGraphFromFile(argv[2]);
         MST mst = kruskal_mst(testGraph);
 
-        cout << mstToDot(testGraph, mst);
+        if (strcmp(argv[3], "graphonly") == 0)
+        {
+            cout << graphToDot(testGraph);
+        }
+        else if (strcmp(argv[3], "mst_string") == 0)
+        {
+            cout << "MST: " << serializeMST(mst) << "\nTotal Weight: "
+                 << mst.totalWeight << endl;
+        }
+        else
+        {
+            cout << mstToDot(testGraph, mst);
+        }
     }
     else
     {
