@@ -38,7 +38,7 @@ TEST_CASE("Prim's Algorithm: Sparse Graph", "[prim_mst]")
         Graph::Edge(6, 7, 4),
     };
 
-    auto mst = prim_mst(graph, 0);
+    auto mst = prim_mst(graph);
 
     SECTION("Check Total Weight for Sparse Graph")
     {

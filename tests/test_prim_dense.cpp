@@ -59,7 +59,7 @@ TEST_CASE("Prim's Algorithm: Dense Graph", "[prim_mst]")
         Graph::Edge(8, 9, 3),
     };
 
-    auto mst = prim_mst(graph, 0);
+    auto mst = prim_mst(graph);
 
     SECTION("Check Total Weight for Dense Graph")
     {

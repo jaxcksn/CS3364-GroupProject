@@ -3,6 +3,6 @@
 
 #include "graph.hpp"
 
-MST prim_mst(Graph &graph, int start = 0);
+MST prim_mst(Graph &graph);
 
 #endif

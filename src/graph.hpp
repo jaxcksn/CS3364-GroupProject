@@ -45,7 +45,7 @@ public:
     // Create an adjacency list.
     std::vector<std::vector<std::pair<int, int>>> adjList;
 
-    explicit Graph(int verts, const std::string &graphName = "") : adjList(verts), name(graphName) {}
+    explicit Graph(int verts, const std::string &graphName = "") : name(graphName), adjList(verts)  {}
 
     void addEdge(int src, int dest, int weight)
     {
