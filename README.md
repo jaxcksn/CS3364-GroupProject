@@ -1,6 +1,7 @@
 # CS3364-GroupProject
 
-[![Check](https://github.com/jaxcksn/CS3364-GroupProject/actions/workflows/meson-build.yml/badge.svg)](https://github.com/jaxcksn/CS3364-GroupProject/actions/workflows/meson-build.yml)
+[![Build](https://github.com/jaxcksn/CS3364-GroupProject/actions/workflows/meson-build.yml/badge.svg)](https://github.com/jaxcksn/CS3364-GroupProject/actions/workflows/meson-build.yml)
+[![Test](https://github.com/jaxcksn/CS3364-GroupProject/actions/workflows/meson-test.yml/badge.svg)](https://github.com/jaxcksn/CS3364-GroupProject/actions/workflows/meson-test.yml)
 
 ## Getting Started
 
