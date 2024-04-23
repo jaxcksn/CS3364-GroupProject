@@ -1,4 +1,4 @@
-name: Build
+name: Test
 
 on:
   pull_request:
@@ -29,5 +29,5 @@ jobs:
       - name: Configure Meson Build
         run: meson setup build/
 
-      - name: Build
-        run: meson compile -C build/
+      - name: Test
+        run: meson test -C build/
