@@ -17,8 +17,8 @@ using namespace std;
  */
 void testAlgorithm(Graph &graph, ofstream &outputFile, int times = 10)
 {
-    chrono::steady_clock::time_point start;
-    chrono::steady_clock::time_point end;
+    auto start = chrono::high_resolution_clock::now();
+    auto end = chrono::high_resolution_clock::now();
     chrono::nanoseconds kruskalTotal(0);
     chrono::nanoseconds primTotal(0);
     MST mst;
