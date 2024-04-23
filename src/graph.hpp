@@ -6,6 +6,7 @@
 #include <iostream>
 #include <set>
 #include <sstream>
+#include <algorithm>
 
 /**
  * Representation of a graph as an adjacency list. Might prove useful to convert this to
