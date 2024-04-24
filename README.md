@@ -39,9 +39,11 @@ Generate an image of the minimum spanning tree (MST) for a given graph.
 
 ##### Options:
 
--g, --graph, graphP: Specify the path to the input graph file.
--o, --output, output: Specify the output image file name (must end with .png).
--a, --algo, algo: Select the algorithm (kruskal or prim). Default is kruskal.
+-g, --graph: Specify the path to the input graph file.
+
+-o, --output: Specify the output image file name (must end with .png).
+
+-a, --algo: Select the algorithm (kruskal or prim). Default is kruskal.
 
 #### 2. Graph Image Generation
 
@@ -53,8 +55,9 @@ Create an image of the original graph.
 
 ##### Options:
 
--g, --graph, graphP: Specify the path to the input graph file.
--o, --output, output: Specify the output image file name (must end with .png).
+-g, --graph: Specify the path to the input graph file.
+
+-o, --output: Specify the output image file name (must end with .png).
 
 #### 3. Benchmarking
 
@@ -66,7 +69,7 @@ Run performance benchmarks for the MST algorithms and output the results to a CS
 
 ##### Options:
 
--o, --output, output: Specify the output CSV file name. Default is output.csv.
+-o, --output: Specify the output CSV file name. Default is output.csv.
 
 ### Examples
 
@@ -90,8 +93,7 @@ Run performance benchmarks for the MST algorithms and output the results to a CS
 
 #### Additional Information
 
-Ensure Graphviz is installed and properly configured on your system as it is required for the image generation features.
-For detailed error logs or additional information, consider implementing verbose or log options in your CLI.
+Ensure **Graphviz** is installed and properly configured on your system as it is required for the image generation features.
 
 ## Editing the Source Code
 
