@@ -19,45 +19,79 @@ python build.py
 
 If everything builds correctly, you should be set to run the program, which can be found in the build directory.
 
-## Using the CLI
+## Usage
 
 ### Command Syntax
 
 ```bash
-./Task2 [GRAPHFILES]
+./Task2 <subcommand> [options]
 ```
 
-### Arguments
+### Subcommands
 
-There is a single command line arguments the program requires
+#### 1. MST Image Generation
 
-1. **GRAPHFILE**: This should be a space seperated lists of graph files to run.
+Generate an image of the minimum spanning tree (MST) for a given graph.
 
-### Output
-
-The program will output a file called "out.txt" that has all the run time information for the program.
-
-### Graph File Format
-
-The graph file should be formatted as follows:
-
-- The first line is the name of the graph (No spaces are allowed)
-- The second line is the number of verticies in the graph
-- Each subsequent line represents an edge with three integers: src, dest, and weight, where src and dest are the vertices connected by the edge, and weight is the weight of the edge.
-
-Example of a graph file content:
-
-```
-example_graph
-3
-0 1 10
-2 1 2
-1 2 3
+```bash
+./Task2 mst -g <path_to_graph_file> -o <output_image.png> -a <algorithm>
 ```
 
-There are some sample graph files in the [examples folder](/examples/)
+##### Options:
 
-**NOTE**: Graphs are undirected in this program, so you only should specify an edge once, for example if you have the edge `0 1 2` you shouldn't add `1 0 2` since they are the same.
+-g, --graph, graphP: Specify the path to the input graph file.
+-o, --output, output: Specify the output image file name (must end with .png).
+-a, --algo, algo: Select the algorithm (kruskal or prim). Default is kruskal.
+
+#### 2. Graph Image Generation
+
+Create an image of the original graph.
+
+```bash
+./Task2 graph -g <path_to_graph_file> -o <output_image.png>
+```
+
+##### Options:
+
+-g, --graph, graphP: Specify the path to the input graph file.
+-o, --output, output: Specify the output image file name (must end with .png).
+
+#### 3. Benchmarking
+
+Run performance benchmarks for the MST algorithms and output the results to a CSV file.
+
+```bash
+./Task2 benchmark -o <output_file.csv>
+```
+
+##### Options:
+
+-o, --output, output: Specify the output CSV file name. Default is output.csv.
+
+### Examples
+
+#### Generating an MST image using Kruskal's algorithm:
+
+```bash
+./Task2 mst -g example.graph -o mst_output.png -a kruskal
+```
+
+#### Creating a graph image:
+
+```bash
+./Task2 graph -g example.graph -o graph_output.png
+```
+
+#### Running benchmarks and saving the results:
+
+```bash
+./your_program benchmark -o benchmark_results.csv
+```
+
+#### Additional Information
+
+Ensure Graphviz is installed and properly configured on your system as it is required for the image generation features.
+For detailed error logs or additional information, consider implementing verbose or log options in your CLI.
 
 ## Editing the Source Code
 
