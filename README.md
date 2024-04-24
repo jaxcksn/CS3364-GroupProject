@@ -85,7 +85,7 @@ Run performance benchmarks for the MST algorithms and output the results to a CS
 #### Running benchmarks and saving the results:
 
 ```bash
-./your_program benchmark -o benchmark_results.csv
+./Task2 -o benchmark_results.csv
 ```
 
 #### Additional Information
