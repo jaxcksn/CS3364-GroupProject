@@ -9,19 +9,28 @@
 using namespace std;
 MST kruskal_mst(Graph &graph);
 
+/**
+ * This is just a simplier version of the Graph representation,
+ * since Kruskal's algorithm really just needs an edge list only.
+ */
 class EdgeList
 {
 
 public:
+    // The list of edges
     vector<Graph::Edge> list;
     explicit EdgeList(Graph g)
     {
+        // For each vertex in the adjacency list
         for (int i = 0; i < g.vertNumber(); i++)
         {
+            // For each edge in the vertex list
             for (const auto &[dest, weight] : g.adjList[i])
             {
+                // Only include the first instance of the edge
                 if (i < dest)
                 {
+                    // We'll add it to the vector
                     list.emplace_back(i, dest, weight);
                 }
             }
@@ -29,7 +38,9 @@ public:
     }
 };
 
-// Implementation of DSU or Union Find data structure, used by Kruskal's algorithm.
+/**
+ * Implementation of a Union Find data structure, used by Kruskal's algorithm.
+ */
 class UnionFind
 {
 private:
@@ -46,7 +57,9 @@ public:
         iota(parent.begin(), parent.end(), 0);
     }
 
-    // Recusrive implementation of Find algorithm for the Union Find
+    /**
+     * Recursive implementation of Find algorithm for the Union Find
+     */
     int find(int x)
     {
         if (parent[x] != x)
@@ -56,7 +69,9 @@ public:
         return parent[x];
     }
 
-    // Rank based set union, called "merge" since union is a reserved word in C++
+    /**
+     * Rank based set union, called "merge" since `union` is a reserved word in C++
+     */
     void merge(int x, int y)
     {
         int xRoot = find(x);

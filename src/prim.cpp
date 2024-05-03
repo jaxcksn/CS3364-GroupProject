@@ -2,7 +2,7 @@
 
 using namespace std;
 
-MST prim_mst(Graph &graph, int start = 0)
+MST prim_mst(Graph &graph)
 {
     MST mst;
     return mst;
