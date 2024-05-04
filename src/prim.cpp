@@ -3,8 +3,8 @@
 #include <vector>
 #include <queue>
 #include <limits>
-#include <set>
 #include <iostream>
+#include <unordered_set>
 using namespace std;
 
 // Used in the minimum heap to compare the weight of two edges.
@@ -35,7 +35,7 @@ MST prim_mst(Graph &graph)
     // Pick random vertex to Start
     int start = rand() % graph.vertNumber();
     // Initialize the visited set
-    set<int> visited;
+    unordered_set<int> visited;
     // Add our starting vertex to the visited set
     visited.insert(start);
 
