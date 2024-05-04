@@ -13,6 +13,7 @@
 #include <cstdio>
 #include <cstring>
 #include <random>
+#include "spinner.hpp"
 
 using namespace std;
 
@@ -100,10 +101,12 @@ long long benchmarkMST(Func mstFunc, Graph &graph)
 
 void runBenchmark(const string &outputFile)
 {
+    jms::Spinner s("Running Benchmark (This may take some time)", jms::classic);
+    s.start();
     ofstream results(outputFile);
     results << "Vertices,Edges,Kruskal,Prim\n";
 
-    for (int i = 10; i <= 1000; i += 10)
+    for (int i = 10; i <= 1000; i += 5)
     {
         // Max number for a dense graph
         int e = i * (i - 1) / 2;
@@ -117,6 +120,7 @@ void runBenchmark(const string &outputFile)
         results << i << "," << e << "," << timeKruskal << "," << 0.0 << "\n";
     }
     results.close();
+    s.finish(jms::FinishedState::SUCCESS, "Finished Benchmark!");
 }
 
 int main(int argc, char *argv[])

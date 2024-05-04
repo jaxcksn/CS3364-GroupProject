@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "Catch2.hpp"
-#include "../src/prim.hpp"
 #include "algorithm"
+#include "../src/prim.hpp"
 #include "../src/graph.hpp"
 
 using namespace std;

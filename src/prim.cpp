@@ -3,7 +3,20 @@
 #include <vector>
 #include <queue>
 #include <limits>
+#include <set>
+#include <iostream>
 using namespace std;
+
+// Used in the minimum heap to compare the weight of two edges.
+class edgeCompare
+{
+public:
+    // Compare the weight of two edges
+    int operator()(const Graph::Edge &a, const Graph::Edge &b)
+    {
+        return a.weight > b.weight;
+    }
+};
 
 /**
  * Implementation of Prim's Algorithm
@@ -11,51 +24,62 @@ using namespace std;
  * @param graph The graph to perform the algorithm on
  * @return A `MST` object with the minimum spanning tree of the graph
  */
-MST prim_mst(const Graph& graph) {
+MST prim_mst(Graph &graph)
+{
     // Declare the MST
     MST mst;
 
-    // Create a vector to store the minimum weight edges
-    vector<Graph::Edge> minEdges(graph.vertNumber());
+    // Create a min heap to store the edges
+    priority_queue<Graph::Edge, vector<Graph::Edge>, edgeCompare> edgeQueue;
 
-    // Create a priority queue to store the edges
-    priority_queue<Graph::Edge, vector<Graph::Edge>, greater<Graph::Edge>> edgeQueue;
+    // Pick random vertex to Start
+    int start = rand() % graph.vertNumber();
+    // Initialize the visited set
+    set<int> visited;
+    // Add our starting vertex to the visited set
+    visited.insert(start);
 
-    // Initialize all minimum weights to infinity
-    for (int i = 0; i < graph.vertNumber(); ++i) {
-        minEdges[i].weight = numeric_limits<double>::infinity();
+    cout << "Start: " << start << endl;
+
+    // For each edge in the adjacency list for the start vertex
+    for (const auto &[dest, weight] : graph.adjList[start])
+    {
+        // We'll add it to the min heap
+        edgeQueue.emplace(Graph::Edge(start, dest, weight));
     }
 
-    // Start with vertex 0
-    minEdges[0].weight = 0;
-    edgeQueue.push({ 0, 0, 0.0 });  // Dummy edge for vertex 0
-
-    while (!edgeQueue.empty()) {
+    // Loop until the MST is full or our queue is empty.
+    while (mst.edges.size() < graph.vertNumber() - 1)
+    {
         // Get the minimum weight edge
         Graph::Edge edge = edgeQueue.top();
+        // Remove the edge from the queue
         edgeQueue.pop();
 
         // If the vertex is already in the MST, skip it
-        if (minEdges[edge.dest].weight < numeric_limits<double>::infinity()) {
-            continue;
-        }
+        if (visited.count(edge.dest) == 0)
+        {
+            // Add the edge to our MST
+            // Per our minimum spanning tree spec, the edge should always be from the lower vertex to the higher vertex.
+            if (edge.src > edge.dest)
+                mst.edges.push_back(Graph::Edge(edge.dest, edge.src, edge.weight));
+            else
+                mst.edges.push_back(edge);
 
-        // Add the edge to the MST
-        mst.edges.push_back(edge);
-        mst.totalWeight += edge.weight;
-
-        // Update the minimum weights for the adjacent vertices
-        for (const auto& adj : graph.adjList[edge.dest]) {
-            int adjVertex = adj.first;
-            int weight = adj.second;
-            if (minEdges[adjVertex].weight == numeric_limits<double>::infinity()) {
-                minEdges[adjVertex].src = edge.dest;
-                minEdges[adjVertex].dest = adjVertex;
-                minEdges[adjVertex].weight = weight;
-                edgeQueue.push(minEdges[adjVertex]);
+            mst.totalWeight += edge.weight;
+            // Mark the destination vertex as visited.
+            visited.insert(edge.dest);
+            // For all adjacent edges from the edge destination vertex
+            for (const auto &[dest, weight] : graph.adjList[edge.dest])
+            {
+                // The destination of adjacent edge is not in the visited set
+                if (visited.count(dest) == 0)
+                {
+                    // Add the edge to the min heap
+                    edgeQueue.emplace(Graph::Edge(edge.dest, dest, weight));
+                }
             }
         }
     }
-
     return mst;
 }
