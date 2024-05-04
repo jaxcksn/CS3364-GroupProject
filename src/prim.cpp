@@ -2,7 +2,7 @@
 #include "prim.hpp"
 #include <vector>
 #include <queue>
-#include <limits>
+#include <climits>
 #include <iostream>
 #include <unordered_set>
 using namespace std;
